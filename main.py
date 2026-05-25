@@ -3,6 +3,7 @@ from scipy.io.wavfile import write
 from faster_whisper import WhisperModel
 from command_router import handle_command
 from agent import send_to_aider
+from memory import add_to_memory, get_context
 
 model = WhisperModel(
     "base",
@@ -50,3 +51,8 @@ while True:
 
     if len(text.strip()) > 0:
         send_to_aider(text)
+    
+    add_to_memory(text)
+
+    print("\nCurrent Context:")
+    print(get_context())
